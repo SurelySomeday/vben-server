@@ -6,7 +6,8 @@ import com.cosium.spring.data.jpa.entity.graph.repository.EntityGraphCrudReposit
 import com.cosium.spring.data.jpa.entity.graph.repository.EntityGraphPagingAndSortingRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
-import top.yxlgx.wink.entity.User;
+import top.yxlgx.wink.entity.Dept;
+import top.yxlgx.wink.entity.Menu;
 
 import java.util.Optional;
 
@@ -15,14 +16,10 @@ import java.util.Optional;
  * @Description:
  */
 @Repository
-public interface UserRepository extends EntityGraphCrudRepository<User,Long>, EntityGraphPagingAndSortingRepository<User,Long>,
-        JpaSpecificationExecutor<User> {
+public interface DeptRepository extends EntityGraphCrudRepository<Dept,Long>, EntityGraphPagingAndSortingRepository<Dept,Long>,
+        JpaSpecificationExecutor<Dept> {
     @Override
     default Optional<EntityGraph> defaultEntityGraph() {
-        return NamedEntityGraph.loading("user.all").execute(Optional::of);
+        return NamedEntityGraph.loading("dept.all").execute(Optional::of);
     }
-
-    Optional<User> findByName(String username);
-
-    Optional<User> findByUsername(String username);
 }

@@ -11,10 +11,8 @@ import top.yxlgx.wink.entity.Role;
 import java.util.Optional;
 
 /**
- * @Author yanxin.
- * @Date 2023/3/6 13:12.
- * Created by IntelliJ IDEA
- * File Description:
+ * @author yanxin
+ * @Description:
  */
 @Repository
 public interface RoleRepository extends EntityGraphCrudRepository<Role,Long>, EntityGraphPagingAndSortingRepository<Role,Long>,

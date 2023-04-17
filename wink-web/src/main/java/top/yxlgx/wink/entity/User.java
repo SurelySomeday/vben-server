@@ -1,14 +1,14 @@
 package top.yxlgx.wink.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.JoinFormula;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.UuidGenerator;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,44 +22,68 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * @Author yanxin.
- * @Date 2023/3/6 9:57.
- * Created by IntelliJ IDEA
- * File Description:
+ * @author yanxin
+ * @Description: 用户
  */
+@Getter
+@Setter
+@Entity
+@Table(name = "sys_user", indexes = {
+        @Index(name = "sys_user_username",columnList = "username", unique = true)
+    }
+)
 @NamedEntityGraph(
         name = "user.all",
         attributeNodes =  {
                 @NamedAttributeNode("roles")
         }
 )
-@Getter
-@Setter
-@Entity
-
-@Table(name = "sys_user", indexes = {
-        @Index(name = "sys_user_username",columnList = "username", unique = true)
-    }
-)
 @SQLDelete(sql = "update sys_user set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
 public class User extends BaseEntity implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Comment("主键")
     private Long id;
+
+    /**
+     * 名字
+     */
     @Column(name = "name")
+    @Comment("名字")
     private String name;
+
+    /**
+     * 年龄
+     */
     @Column(name = "age")
+    @Comment("年龄")
     private Integer age;
 
+    /**
+     * 用户名
+     */
     @Column(name = "username")
+    @Comment("用户名")
     String username;
+
+    /**
+     * 密码
+     */
     @Column(name = "password")
+    @Comment("密码")
     private String password;
 
+    /**
+     * 是否删除
+     */
     @Column(name = "deleted")
+    @Comment("是否删除")
     private Integer deleted=0;
 
+    /**
+     * 角色列表
+     */
     @ManyToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name = "sys_users_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},

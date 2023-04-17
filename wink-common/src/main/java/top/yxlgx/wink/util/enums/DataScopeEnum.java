@@ -19,24 +19,22 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * <p>
- * 数据权限枚举
- * </p>
- * @author Zheng Jie
- * @date 2020-05-07
+ * @author yanxin
+ * @Description: 数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
  */
 @Getter
 @AllArgsConstructor
 public enum DataScopeEnum {
 
     /* 全部的数据权限 */
-    ALL("全部", "全部的数据权限"),
+    ALL("1", "全部的数据权限"),
 
     /* 自己部门的数据权限 */
-    THIS_LEVEL("本级", "自己部门的数据权限"),
+    CUSTOMIZE("2", "自定数据权限"),
 
     /* 自定义的数据权限 */
-    CUSTOMIZE("自定义", "自定义的数据权限");
+    SELF_DEPT("3", "本部门数据权限"),
+    SELF_DEPT_AND_LOWER("4", "本部门及以下数据权限");
 
     private final String value;
     private final String description;
