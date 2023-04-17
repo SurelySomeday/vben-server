@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  * @author yanxin
  * @Description:
  */
-//@Component
+@Component
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {

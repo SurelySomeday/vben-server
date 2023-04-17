@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  * @author yanxin
  * @Description:
  */
-//@Component
+@Component
 public class JwtLogoutHandler implements LogoutHandler {
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {

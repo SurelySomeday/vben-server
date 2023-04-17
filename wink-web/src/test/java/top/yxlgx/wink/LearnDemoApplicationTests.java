@@ -3,6 +3,7 @@ package top.yxlgx.wink;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import top.yxlgx.wink.entity.Role;
 import top.yxlgx.wink.entity.User;
 import top.yxlgx.wink.repository.RoleRepository;
@@ -33,6 +34,13 @@ class LearnDemoApplicationTests {
         userRepository.save(user);
         Iterable<User> all = userRepository.findAll();
         System.out.println(all);
+    }
+
+    public static void main(String[] args) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String encode = bCryptPasswordEncoder.encode("123456");
+        System.out.printf(encode);
+
     }
 
 

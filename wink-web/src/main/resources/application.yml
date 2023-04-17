@@ -26,11 +26,11 @@ spring:
   jpa:
     #show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
-        #dialect_resolvers: top.yxlgx.wink.config.orm.jpa.CustomStandardDialectResolver
+        dialect_resolvers: top.yxlgx.wink.config.orm.jpa.CustomStandardDialectResolver
         format_sql: true
         jdbc:
           batch_size: 100

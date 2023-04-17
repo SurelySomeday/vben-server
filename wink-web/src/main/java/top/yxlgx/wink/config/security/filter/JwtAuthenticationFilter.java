@@ -21,7 +21,7 @@ import java.io.IOException;
  * @author yanxin
  * @Description:
  */
-//@Component
+@Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     /**
