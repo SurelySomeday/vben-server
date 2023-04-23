@@ -2,8 +2,6 @@ package top.yxlgx.wink.entity;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Comment;
@@ -34,32 +32,32 @@ import java.util.Set;
                 @NamedAttributeNode("menus")
         }
 )
-@SQLDelete(sql = "update sys_role set deleted = 1 where id = ?")
+@SQLDelete(sql = "update sys_role set deleted = 1 where role_id = ?")
 @Where(clause = "deleted = 0")
 public class Role extends BaseEntity implements Serializable {
     @Id
+    @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Comment("id")
-    private Long id;
+    @Comment("主键")
+    private Long roleId;
 
     /**
-     * 名称
+     * 角色名称
      */
-    @Comment("名称")
+    @Comment("角色名称")
     private String name;
+
+    /**
+     * 角色值
+     */
+    @Comment("角色值")
+    private String value;
 
     /**
      * 数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
      */
     @Comment("数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）")
     private String dataScope = DataScopeEnum.SELF_DEPT_AND_LOWER.getValue();
-
-    /**
-     * 级别，数值越小，级别越大
-     */
-    @Column(name = "level")
-    @Comment("级别，数值越小，级别越大")
-    private Integer level = 3;
 
     /**
      * 描述
@@ -86,15 +84,15 @@ public class Role extends BaseEntity implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sys_roles_menus",
-            joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "menu_id",referencedColumnName = "id")})
+            joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")},
+            inverseJoinColumns = {@JoinColumn(name = "menu_id",referencedColumnName = "menu_id")})
     private Set<Menu> menus;
 
     @JSONField(serialize = false)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sys_roles_depts",
-            joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "dept_id",referencedColumnName = "id")})
+            joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")},
+            inverseJoinColumns = {@JoinColumn(name = "dept_id",referencedColumnName = "dept_id")})
     private Set<Dept> depts;
 
     @Override
@@ -106,11 +104,11 @@ public class Role extends BaseEntity implements Serializable {
             return false;
         }
         Role role = (Role) o;
-        return Objects.equals(id, role.id);
+        return Objects.equals(roleId, role.roleId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(roleId);
     }
 }

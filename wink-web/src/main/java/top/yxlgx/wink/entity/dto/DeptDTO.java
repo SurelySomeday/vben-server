@@ -9,35 +9,38 @@ import java.util.Objects;
 
 /**
  * @author yanxin
- * @Description: 用户
+ * @Description: 部门
  */
 @Getter
 @Setter
-public class UserDTO {
-    @NotNull(groups = {BaseEntity.Update.class})
-    private Long userId;
+public class DeptDTO {
+
+    @NotNull(groups = BaseEntity.Update.class)
+    private Long deptId;
+    /**
+     * 排序
+     */
+    private Integer deptSort;
 
     /**
-     * 真实姓名
+     * 部门名称
      */
-    private String realName;
+    private String name;
 
     /**
-     * 年龄
+     * 是否启用
      */
-    private Integer age;
+    private Boolean enabled;
 
     /**
-     * 用户名
+     * 上级部门
      */
-    @NotNull(groups = {BaseEntity.Update.class,BaseEntity.Create.class})
-    String username;
+    private Long pid;
 
     /**
-     * 头像
+     * 是否删除
      */
-    private String avatar;
-
+    private Integer deleted=0;
 
     @Override
     public boolean equals(Object o) {
@@ -47,12 +50,13 @@ public class UserDTO {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UserDTO user = (UserDTO) o;
-        return Objects.equals(userId, user.userId);
+        DeptDTO dept = (DeptDTO) o;
+        return Objects.equals(deptId, dept.deptId) &&
+                Objects.equals(name, dept.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId);
+        return Objects.hash(deptId, name);
     }
 }

@@ -38,41 +38,44 @@ import java.util.stream.Collectors;
                 @NamedAttributeNode("roles")
         }
 )
-@SQLDelete(sql = "update sys_user set deleted = 1 where id = ?")
+@SQLDelete(sql = "update sys_user set deleted = 1 where user_id = ?")
 @Where(clause = "deleted = 0")
 public class User extends BaseEntity implements Serializable, UserDetails {
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Comment("主键")
-    private Long id;
+    private Long userId;
 
     /**
-     * 名字
+     * 真实姓名
      */
-    @Column(name = "name")
-    @Comment("名字")
-    private String name;
+    @Comment("真实姓名")
+    private String realName;
 
     /**
      * 年龄
      */
-    @Column(name = "age")
     @Comment("年龄")
     private Integer age;
 
     /**
      * 用户名
      */
-    @Column(name = "username")
     @Comment("用户名")
     String username;
 
     /**
      * 密码
      */
-    @Column(name = "password")
     @Comment("密码")
     private String password;
+
+    /**
+     * 头像
+     */
+    @Comment("头像")
+    private String avatar;
 
     /**
      * 是否删除
@@ -86,8 +89,8 @@ public class User extends BaseEntity implements Serializable, UserDetails {
      */
     @ManyToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name = "sys_users_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")}
     )
     private Set<Role> roles;
 
@@ -148,11 +151,11 @@ public class User extends BaseEntity implements Serializable, UserDetails {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id);
+        return Objects.equals(userId, user.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(userId);
     }
 }

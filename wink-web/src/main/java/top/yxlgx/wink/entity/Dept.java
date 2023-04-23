@@ -3,10 +3,11 @@ package top.yxlgx.wink.entity;
 import com.alibaba.fastjson2.annotation.JSONField;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import top.yxlgx.wink.entity.base.BaseEntity;
 
 import java.io.Serializable;
@@ -27,14 +28,15 @@ import java.util.Set;
                 @NamedAttributeNode("children")
         }
 )
+@SQLDelete(sql = "update sys_dept set deleted = 1 where dept_id = ?")
+@Where(clause = "deleted = 0")
 public class Dept extends BaseEntity implements Serializable {
     @Id
-    @Column(name = "id")
+    @Column(name = "dept_id")
     @NotNull(groups = Update.class)
     @Comment("主键")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Long deptId;
     /**
      * 排序
      */
@@ -75,7 +77,7 @@ public class Dept extends BaseEntity implements Serializable {
      * 子部门列表
      */
     @OneToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name = "pid", referencedColumnName = "id")
+    @JoinColumn(name = "pid", referencedColumnName = "dept_id")
     private Set<Dept> children;
 
     /**
@@ -94,12 +96,12 @@ public class Dept extends BaseEntity implements Serializable {
             return false;
         }
         Dept dept = (Dept) o;
-        return Objects.equals(id, dept.id) &&
+        return Objects.equals(deptId, dept.deptId) &&
                 Objects.equals(name, dept.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(deptId, name);
     }
 }

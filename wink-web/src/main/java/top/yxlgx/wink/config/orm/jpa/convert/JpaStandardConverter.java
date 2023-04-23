@@ -25,7 +25,7 @@ public class JpaStandardConverter implements ConditionalGenericConverter {
 
     @Override
     public Set<ConvertiblePair> getConvertibleTypes() {
-        Set<ConvertiblePair> convertibleTypes = new LinkedHashSet(1);
+        Set<ConvertiblePair> convertibleTypes = new LinkedHashSet<>(1);
         convertibleTypes.add(new ConvertiblePair(Map.class, Object.class));
         return convertibleTypes;
     }
@@ -33,7 +33,7 @@ public class JpaStandardConverter implements ConditionalGenericConverter {
     @Override
     public Object convert(Object o, TypeDescriptor source, TypeDescriptor target) {
         try {
-            Object o3 = target.getObjectType().newInstance();
+            Object o3 = target.getObjectType().getDeclaredConstructor().newInstance();
             if (o instanceof Map) {
                 return copyMapToObj((Map<String, Object>) o, o3);
             } else {

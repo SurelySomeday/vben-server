@@ -50,7 +50,7 @@ public class SecurityConfiguration {
                 .disable()
                 // 设置白名单
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/login")
+                .requestMatchers("/login")
                 .permitAll()
                 // 对于其他任何请求，都保护起来
                 .anyRequest()

@@ -22,7 +22,5 @@ public interface UserRepository extends EntityGraphCrudRepository<User,Long>, En
         return NamedEntityGraph.loading("user.all").execute(Optional::of);
     }
 
-    Optional<User> findByName(String username);
-
     Optional<User> findByUsername(String username);
 }
