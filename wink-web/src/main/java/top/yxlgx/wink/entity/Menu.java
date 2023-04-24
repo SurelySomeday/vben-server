@@ -1,6 +1,9 @@
 package top.yxlgx.wink.entity;
 
 import com.alibaba.fastjson2.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -123,6 +126,7 @@ public class Menu extends BaseEntity implements Serializable {
     /**
      * 子菜单列表
      */
+    @JsonManagedReference
     @OneToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name = "pid", referencedColumnName = "menu_id")
     private Set<Menu> children;
@@ -130,6 +134,8 @@ public class Menu extends BaseEntity implements Serializable {
     /**
      * 拥有菜单的角色
      */
+    @JsonIgnore
+    @JsonBackReference
     @JSONField(serialize = false)
     @ManyToMany(mappedBy = "menus")
     private Set<Role> roles;

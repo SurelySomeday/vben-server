@@ -1,6 +1,9 @@
 package top.yxlgx.wink.entity;
 
 import com.alibaba.fastjson2.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -78,17 +81,20 @@ public class Role extends BaseEntity implements Serializable {
     @Comment("是否删除")
     private Integer deleted=0;
 
-    @JSONField(serialize = false)
+    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
+    @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sys_roles_menus",
             joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "menu_id",referencedColumnName = "menu_id")})
     private Set<Menu> menus;
 
-    @JSONField(serialize = false)
+    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sys_roles_depts",
             joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")},

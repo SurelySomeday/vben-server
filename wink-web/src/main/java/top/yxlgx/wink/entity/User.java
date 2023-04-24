@@ -1,5 +1,6 @@
 package top.yxlgx.wink.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Index;
@@ -87,6 +88,7 @@ public class User extends BaseEntity implements Serializable, UserDetails {
     /**
      * 角色列表
      */
+    @JsonManagedReference
     @ManyToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name = "sys_users_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},

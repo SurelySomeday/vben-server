@@ -1,6 +1,7 @@
 package top.yxlgx.wink.entity;
 
 import com.alibaba.fastjson2.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -76,6 +77,7 @@ public class Dept extends BaseEntity implements Serializable {
     /**
      * 子部门列表
      */
+    @JsonManagedReference
     @OneToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name = "pid", referencedColumnName = "dept_id")
     private Set<Dept> children;
@@ -83,6 +85,7 @@ public class Dept extends BaseEntity implements Serializable {
     /**
      * 角色
      */
+    @JsonManagedReference
     @JSONField(serialize = false)
     @ManyToMany(mappedBy = "depts")
     private Set<Role> roles;
