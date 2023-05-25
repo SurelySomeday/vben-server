@@ -22,6 +22,7 @@
         <java.version>17</java.version>
         <spring-data-jpa-entity-graph.version>3.0.1</spring-data-jpa-entity-graph.version>
         <p6spy.version>3.9.1</p6spy.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
         <mysql.driver.version>8.0.32</mysql.driver.version>
         <mybatis.boot.version>3.0.0</mybatis.boot.version>
         <snakeyaml.version>2.0</snakeyaml.version>

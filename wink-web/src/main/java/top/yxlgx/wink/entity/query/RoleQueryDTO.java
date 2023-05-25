@@ -1,6 +1,7 @@
 package top.yxlgx.wink.entity.query;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import top.yxlgx.wink.annotation.Query;
 
 import java.util.List;
@@ -9,8 +10,9 @@ import java.util.List;
  * @author yanxin
  * @Description:
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class RoleQueryDTO {
+public class RoleQueryDTO extends BaseQuery {
     @Query
     Long roleId;
 

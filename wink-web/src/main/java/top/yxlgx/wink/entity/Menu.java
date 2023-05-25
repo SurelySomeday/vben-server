@@ -123,6 +123,25 @@ public class Menu extends BaseEntity implements Serializable {
     @Comment("外链菜单")
     private Boolean iFrame;
 
+
+    /**
+     * 是否外链
+     */
+    @Comment("是否外链")
+    private Boolean isExt;
+
+    /**
+     * 是否缓存
+     */
+    @Comment("是否缓存")
+    private Boolean keepalive;
+
+    /**
+     * 是否启用
+     */
+    @Comment("是否启用")
+    private Boolean status;
+
     /**
      * 子菜单列表
      */
