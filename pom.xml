@@ -27,6 +27,7 @@
         <mybatis.boot.version>3.0.0</mybatis.boot.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <jwt.version>0.11.5</jwt.version>
+        <querydsl.version>5.0.0</querydsl.version>
     </properties>
 
     <dependencies>

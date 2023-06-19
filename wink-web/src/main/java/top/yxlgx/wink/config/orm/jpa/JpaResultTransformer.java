@@ -8,6 +8,10 @@ import org.hibernate.query.TupleTransformer;
 
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +37,12 @@ public class JpaResultTransformer implements TupleTransformer {
     public Object transformTuple(Object[] tuple, String[] aliases) {
         Object object = clazz.newInstance();
         for (int i = 0; i < tuple.length; i++) {
-            String fieldName = CaseUtils.toCamelCase(aliases[i].toLowerCase(),false, '_');
+            String fieldName = "";
+            if (aliases[i].contains("_")) {
+                fieldName = CaseUtils.toCamelCase(aliases[i].toLowerCase(), false, '_');
+            } else {
+                fieldName = aliases[i];
+            }
             try {
                 Field field = getField(fieldName);
                 if (field != null && tuple[i] != null) {
@@ -55,6 +64,7 @@ public class JpaResultTransformer implements TupleTransformer {
 
     /**
      * 自动配置字段值
+     *
      * @param tuple
      * @param target
      * @param field
@@ -81,13 +91,21 @@ public class JpaResultTransformer implements TupleTransformer {
                 if (tuple instanceof Timestamp) {
                     long time = ((Timestamp) tuple).getTime();
                     field.set(target, new Date(time));
-                }else{
+                }
+            } else if (field.getType() == LocalDate.class) {
+                if (tuple instanceof Timestamp) {
                     long time = ((Timestamp) tuple).getTime();
-                    field.set(target, new Date(time));
+                    field.set(target, LocalDate.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault()));
+                }
+            } else if (field.getType() == LocalDateTime.class) {
+                if (tuple instanceof Timestamp) {
+                    long time = ((Timestamp) tuple).getTime();
+                    field.set(target, LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault()));
                 }
             }
 
         }
+
 
     }
 }

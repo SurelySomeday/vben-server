@@ -1,6 +1,5 @@
 package top.yxlgx.wink.service;
 
-import jakarta.annotation.Resource;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +22,7 @@ import java.util.Optional;
 public class BaseServiceImpl<R extends CrudRepository<T, ID> & JpaSpecificationExecutor<T>, T,ID> implements BaseService<T,ID> {
 
     @Autowired
-    R repository;
+    protected R repository;
 
 
     @Override
