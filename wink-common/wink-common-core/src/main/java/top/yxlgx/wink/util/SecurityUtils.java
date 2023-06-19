@@ -23,8 +23,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import top.yxlgx.wink.exception.BadRequestException;
 import top.yxlgx.wink.util.enums.DataScopeEnum;
+import top.yxlgx.wink.exception.BadRequestException;
 
 import java.util.List;
 

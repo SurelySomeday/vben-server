@@ -1,12 +1,8 @@
 package top.yxlgx.wink.controller;
 
 import jakarta.annotation.Resource;
-import jakarta.persistence.criteria.Predicate;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import top.yxlgx.wink.convert.MenuConverter;
@@ -14,7 +10,6 @@ import top.yxlgx.wink.entity.Menu;
 import top.yxlgx.wink.entity.base.BaseEntity;
 import top.yxlgx.wink.entity.dto.MenuDTO;
 import top.yxlgx.wink.entity.query.MenuQueryDTO;
-import top.yxlgx.wink.repository.MenuRepository;
 import top.yxlgx.wink.service.MenuService;
 import top.yxlgx.wink.util.QueryHelp;
 import top.yxlgx.wink.util.Result;

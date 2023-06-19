@@ -1,7 +1,6 @@
 package top.yxlgx.wink.config.security.service;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Service;
 import top.yxlgx.wink.util.SecurityUtils;
 
 import java.util.Arrays;

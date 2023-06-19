@@ -1,22 +1,12 @@
 package top.yxlgx.wink.entity.dto;
 
-import com.alibaba.fastjson2.annotation.JSONField;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-import top.yxlgx.wink.entity.Dept;
-import top.yxlgx.wink.entity.Menu;
-import top.yxlgx.wink.entity.User;
 import top.yxlgx.wink.entity.base.BaseEntity;
 import top.yxlgx.wink.util.enums.DataScopeEnum;
 
-import java.io.Serializable;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * @author yanxin

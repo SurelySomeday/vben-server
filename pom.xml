@@ -17,6 +17,9 @@
     <modules>
         <module>wink-web</module>
         <module>wink-common</module>
+        <module>wink-auth</module>
+        <module>wink-common/wink-common-core</module>
+        <module>wink-common/wink-common-security</module>
     </modules>
     <properties>
         <java.version>17</java.version>
@@ -27,6 +30,7 @@
         <mybatis.boot.version>3.0.0</mybatis.boot.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <jwt.version>0.11.5</jwt.version>
+        <spring-security-oauth2-authorization-server.version>1.1.0</spring-security-oauth2-authorization-server.version>
         <querydsl.version>5.0.0</querydsl.version>
     </properties>
 

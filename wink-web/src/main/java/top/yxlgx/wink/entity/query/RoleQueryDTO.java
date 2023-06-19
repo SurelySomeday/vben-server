@@ -4,8 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import top.yxlgx.wink.annotation.Query;
 
-import java.util.List;
-
 /**
  * @author yanxin
  * @Description:
