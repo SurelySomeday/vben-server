@@ -23,11 +23,10 @@ import java.nio.charset.StandardCharsets;
  * @author yanxin
  * @description 自定义异常处理
  */
-@RequiredArgsConstructor
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
-    private final ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
-    private final MessageSource messageSource;
+    private MessageSource messageSource;
 
     @Override
     @SneakyThrows

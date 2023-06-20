@@ -15,7 +15,7 @@ import top.yxlgx.wink.entity.vo.UserLoginResult;
 import top.yxlgx.wink.repository.UserRepository;
 import top.yxlgx.wink.util.QueryHelp;
 import top.yxlgx.wink.util.Result;
-import top.yxlgx.wink.util.SecurityUtils;
+import top.yxlgx.common.security.util.SecurityUtils;
 
 import java.util.List;
 import java.util.Optional;

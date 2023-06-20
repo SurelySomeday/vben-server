@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package top.yxlgx.wink.util;
+package top.yxlgx.common.security.util;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
@@ -23,6 +23,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import top.yxlgx.wink.util.SpringContextHolder;
 import top.yxlgx.wink.util.enums.DataScopeEnum;
 import top.yxlgx.wink.exception.BadRequestException;
 

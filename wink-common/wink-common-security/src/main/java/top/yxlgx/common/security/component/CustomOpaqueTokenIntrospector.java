@@ -28,12 +28,11 @@ import java.util.Optional;
  * @description 将原始token解析为授权信息
  */
 @Slf4j
-@AllArgsConstructor
 public class CustomOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
 
-    private final OAuth2AuthorizationService authorizationService;
+    private OAuth2AuthorizationService authorizationService;
 
-    private final ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
     @Override
     public OAuth2AuthenticatedPrincipal introspect(String token) {
         OAuth2Authorization oldAuthorization = authorizationService.findByToken(token, OAuth2TokenType.ACCESS_TOKEN);

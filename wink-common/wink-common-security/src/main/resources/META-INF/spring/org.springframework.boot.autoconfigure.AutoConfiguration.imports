@@ -1,0 +1,4 @@
+#top.yxlgx.common.security.service.CustomUserDetailsServiceImpl
+#top.yxlgx.common.security.service.CustomOAuth2AuthorizationConsentService
+#top.yxlgx.common.security.service.CustomOAuth2AuthorizationService
+#top.yxlgx.common.security.service.CustomRegisteredClientRepository

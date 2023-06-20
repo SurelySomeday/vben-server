@@ -21,8 +21,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import top.yxlgx.common.security.component.CustomAuthenticationEntryPoint;
 import top.yxlgx.common.security.component.CustomBearerTokenResolver;
 import top.yxlgx.common.security.component.CustomOpaqueTokenIntrospector;
@@ -32,39 +42,11 @@ import top.yxlgx.common.security.component.CustomOpaqueTokenIntrospector;
  * @date 2022-06-02
  */
 @RequiredArgsConstructor
+@Configuration
 public class CustomResourceServerAutoConfiguration {
 
-	/**
-	 * 请求令牌的抽取逻辑
-	 * @return CustomBearerTokenResolver
-	 */
-	@Bean
-	public CustomBearerTokenResolver customBearerTokenResolver() {
-		return new CustomBearerTokenResolver();
-	}
 
-	/**
-	 * 资源服务器异常处理
-	 * @param objectMapper jackson 输出对象
-	 * @param securityMessageSource 自定义国际化处理器
-	 * @return ResourceAuthExceptionEntryPoint
-	 */
-	@Bean
-	public CustomAuthenticationEntryPoint resourceAuthExceptionEntryPoint(ObjectMapper objectMapper,
-																		  MessageSource securityMessageSource) {
-		return new CustomAuthenticationEntryPoint(objectMapper, securityMessageSource);
-	}
 
-	/**
-	 * 资源服务器toke内省处理器
-	 * @param authorizationService token 存储实现
-	 * @return OpaqueTokenIntrospector
-	 */
-	@Bean
-	public OpaqueTokenIntrospector opaqueTokenIntrospector(OAuth2AuthorizationService authorizationService,
-														   ApplicationContext applicationContext) {
-		return new CustomOpaqueTokenIntrospector(authorizationService,applicationContext);
-	}
 
 
 }

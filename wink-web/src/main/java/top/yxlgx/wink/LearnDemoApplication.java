@@ -4,7 +4,9 @@ import com.cosium.spring.data.jpa.entity.graph.repository.support.EntityGraphJpa
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import top.yxlgx.common.security.annotation.EnableLearnerResourceServer;
 
+@EnableLearnerResourceServer
 @SpringBootApplication
 @EnableJpaRepositories(repositoryFactoryBeanClass = EntityGraphJpaRepositoryFactoryBean.class)
 public class LearnDemoApplication {

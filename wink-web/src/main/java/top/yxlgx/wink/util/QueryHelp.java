@@ -15,12 +15,12 @@
  */
 package top.yxlgx.wink.util;
 
-import lombok.extern.slf4j.Slf4j;
-
 import jakarta.persistence.criteria.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import top.yxlgx.common.security.util.SecurityUtils;
 import top.yxlgx.wink.annotation.DataPermission;
 import top.yxlgx.wink.annotation.Query;
 
