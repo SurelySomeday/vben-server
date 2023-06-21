@@ -1,14 +1,19 @@
 server:
   port: 7019
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://127.0.0.1:9000/oauth2/jwks
   main:
     allow-circular-references: true
     allowBeanDefinitionOverriding: true
   datasource:
-    url: jdbc:p6spy:mysql://127.0.0.1:3306/demo?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:p6spy:mysql://127.0.0.1:3307/demo?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: root
-    password: Root123456
+    password: 123456
   #  sql:
 #    init:
 #      schema-locations: classpath*:db/schema.sql

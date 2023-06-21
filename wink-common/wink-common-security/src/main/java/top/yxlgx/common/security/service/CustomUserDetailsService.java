@@ -23,7 +23,7 @@ public interface CustomUserDetailsService extends UserDetailsService, Ordered {
 
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
-    default UserDetails loadUserByUser(CustomUser customUser) {
-        return this.loadUserByUsername(customUser.getUsername());
+    default UserDetails loadUserByUser(UserDetails userDetails) {
+        return this.loadUserByUsername(userDetails.getUsername());
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,11 +19,11 @@ public class CustomUser extends User implements OAuth2AuthenticatedPrincipal {
 
     @Override
     public Map<String, Object> getAttributes() {
-        return null;
+        return new HashMap<>();
     }
 
     @Override
     public String getName() {
-        return null;
+        return this.getUsername();
     }
 }

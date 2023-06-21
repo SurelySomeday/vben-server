@@ -17,9 +17,9 @@
     <modules>
         <module>wink-web</module>
         <module>wink-common</module>
-        <module>wink-auth</module>
         <module>wink-common/wink-common-core</module>
         <module>wink-common/wink-common-security</module>
+        <module>wink-auth</module>
     </modules>
     <properties>
         <java.version>17</java.version>

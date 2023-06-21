@@ -1,5 +1,6 @@
 package top.yxlgx.common.security.component;
 
+import jakarta.annotation.Resource;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
@@ -30,8 +31,10 @@ import java.util.Optional;
 @Slf4j
 public class CustomOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
 
+    @Resource
     private OAuth2AuthorizationService authorizationService;
 
+    @Resource
     private ApplicationContext applicationContext;
     @Override
     public OAuth2AuthenticatedPrincipal introspect(String token) {
@@ -55,7 +58,7 @@ public class CustomOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
             Object principal = Objects.requireNonNull(oldAuthorization).getAttributes().get(Principal.class.getName());
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) principal;
             Object tokenPrincipal = usernamePasswordAuthenticationToken.getPrincipal();
-            userDetails = optional.get().loadUserByUser((CustomUser) tokenPrincipal);
+            userDetails = optional.get().loadUserByUser((UserDetails) tokenPrincipal);
         }
         catch (UsernameNotFoundException notFoundException) {
             log.warn("用户不不存在 {}", notFoundException.getLocalizedMessage());

@@ -2,8 +2,7 @@ package top.yxlgx.common.security.annotation;
 
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import top.yxlgx.common.security.config.CustomResourceServerAutoConfiguration;
-import top.yxlgx.common.security.config.CustomResourceServerConfiguration;
+import top.yxlgx.common.security.config.OAuth2AuthorizationServerSecurityConfiguration;
 
 import java.lang.annotation.*;
 
@@ -16,7 +15,7 @@ import java.lang.annotation.*;
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @EnableMethodSecurity
-@Import({ CustomResourceServerAutoConfiguration.class, CustomResourceServerConfiguration.class })
-public @interface EnableLearnerResourceServer {
+@Import({ OAuth2AuthorizationServerSecurityConfiguration.class })
+public @interface EnableResourceServer {
 
 }
