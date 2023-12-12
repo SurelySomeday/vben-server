@@ -1,5 +1,0 @@
-top.yxlgx.common.security.service.CustomOAuth2AuthorizationService
-top.yxlgx.common.security.config.token.impl.OAuth2TokenSettingsImpl
-top.yxlgx.common.security.service.CustomUserDetailsServiceImpl
-top.yxlgx.common.security.component.CustomOpaqueTokenIntrospector
-top.yxlgx.common.security.component.CustomBearerTokenResolver

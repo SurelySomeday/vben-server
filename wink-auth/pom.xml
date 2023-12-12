@@ -12,16 +12,19 @@
     <groupId>com.aerozhonghuan</groupId>
     <artifactId>wink-auth</artifactId>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>top.yxlgx</groupId>
-            <artifactId>wink-common-security</artifactId>
+            <artifactId>wink-common-security-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.yxlgx</groupId>
+            <artifactId>wink-common-feign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.yxlgx</groupId>
+            <artifactId>wink-upms-api</artifactId>
         </dependency>
     </dependencies>
 
