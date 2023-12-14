@@ -1,9 +1,6 @@
 package top.yxlgx.wink.admin;
 
 import com.querydsl.core.types.Expression;
-import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.Expressions;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
@@ -15,15 +12,12 @@ import org.hibernate.query.sql.internal.NativeQueryImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import top.yxlgx.wink.admin.config.orm.jpa.JpaResultTransformer;
-import top.yxlgx.wink.admin.entity.Menu;
-import top.yxlgx.wink.admin.entity.QMenu;
-import top.yxlgx.wink.admin.entity.Role;
-import top.yxlgx.wink.admin.entity.User;
-import top.yxlgx.wink.admin.entity.vo.MenuVO;
+import top.yxlgx.wink.admin.entity.*;
 import top.yxlgx.wink.admin.repository.RoleRepository;
 import top.yxlgx.wink.admin.repository.UserRepository;
 import top.yxlgx.wink.admin.service.MenuService;
+import top.yxlgx.wink.admin.vo.MenuVO;
+import top.yxlgx.wink.common.jpa.orm.JpaResultTransformer;
 
 import java.lang.reflect.Modifier;
 import java.util.*;
@@ -60,18 +54,18 @@ class LearnDemoApplicationTests {
                 .collect(Collectors.toList());
         Expression<?>[] columnsArray = columns.toArray(new Expression<?>[0]);
         JPAQuery<?> query = new JPAQuery<Void>(entityManager);
-        List<MenuVO> fetch = query.select(Projections.bean(MenuVO.class, qMenu.pid.min().as("pid")))
+        List<?> fetch = query
                 .from(qMenu)
-                .leftJoin(qMenu.children)
-                .leftJoin(qMenu.roles)
-                .where(qMenu.children.any().createTime.eq(
-                        Expressions.dateTimeTemplate(Date.class, "{0}", new Date())))
+/*                .leftJoin(qMenu.children)
+                .leftJoin(qMenu.roles)*/
+/*                .where(qMenu.children.any().createTime.lt(
+                        Expressions.dateTimeTemplate(Timestamp.class, "{0}", new Date())))
                 .where(qMenu.pid.in(
                         JPAExpressions.select(qMenu.menuId)
                                 .from(qMenu)
                                 .where(qMenu.pid.isNotNull())
                                 .limit(1)
-                ))
+                ))*/
                 .fetch();
         System.out.println(fetch);
 
@@ -116,16 +110,9 @@ class LearnDemoApplicationTests {
     @Test
     void contextLoads() {
         Optional<Role> roleOptional = roleRepository.findById(1L);
-        Optional<User> userOptional = userRepository.findById(1L);
-
-        User user = userOptional.get();
-        Role role = roleOptional.get();
-        user.setRoles(Set.of(role));
-        //roleRepository.save(role);
-        userRepository.save(user);
-        Iterable<User> all = userRepository.findAll();
-        System.out.println(all);
     }
+
+
 
     public static void main(String[] args) {
 

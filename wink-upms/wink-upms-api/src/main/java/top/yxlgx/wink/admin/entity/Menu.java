@@ -144,14 +144,14 @@ public class Menu extends BaseEntity implements Serializable {
     /**
      * 子菜单列表
      */
-    @OneToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
+    @OneToMany(cascade= CascadeType.DETACH,fetch=FetchType.EAGER)
     @JoinColumn(name = "pid", referencedColumnName = "menu_id")
     private Set<Menu> children;
 
     /**
      * 拥有菜单的角色
      */
-    @ManyToMany(mappedBy = "menus")
+    @ManyToMany(cascade= CascadeType.DETACH,mappedBy = "menus")
     private Set<Role> roles;
 
 

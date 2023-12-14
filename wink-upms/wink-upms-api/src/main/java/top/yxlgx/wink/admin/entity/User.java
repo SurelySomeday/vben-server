@@ -96,7 +96,7 @@ public class User extends BaseEntity implements Serializable {
     /**
      * 角色列表
      */
-    @ManyToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
+    @ManyToMany(cascade= CascadeType.DETACH,fetch=FetchType.EAGER)
     @JoinTable(name = "sys_users_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")}

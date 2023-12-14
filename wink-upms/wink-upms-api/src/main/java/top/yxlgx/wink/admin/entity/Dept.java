@@ -79,14 +79,14 @@ public class Dept extends BaseEntity implements Serializable {
     /**
      * 子部门列表
      */
-    @OneToMany(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
+    @OneToMany(cascade= CascadeType.DETACH,fetch=FetchType.EAGER)
     @JoinColumn(name = "pid", referencedColumnName = "dept_id")
     private Set<Dept> children;
 
     /**
      * 角色
      */
-    @ManyToMany(mappedBy = "depts")
+    @ManyToMany(cascade= CascadeType.DETACH,mappedBy = "depts")
     private Set<Role> roles;
 
     @Override

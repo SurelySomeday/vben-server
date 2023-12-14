@@ -24,7 +24,6 @@
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
             <classifier>jakarta</classifier>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.querydsl</groupId>

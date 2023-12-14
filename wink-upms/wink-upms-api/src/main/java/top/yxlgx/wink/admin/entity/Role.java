@@ -83,13 +83,13 @@ public class Role extends BaseEntity implements Serializable {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade= CascadeType.DETACH,fetch = FetchType.EAGER)
     @JoinTable(name = "sys_roles_menus",
             joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "menu_id",referencedColumnName = "menu_id")})
     private Set<Menu> menus;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade= CascadeType.DETACH,fetch = FetchType.EAGER)
     @JoinTable(name = "sys_roles_depts",
             joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "dept_id",referencedColumnName = "dept_id")})
