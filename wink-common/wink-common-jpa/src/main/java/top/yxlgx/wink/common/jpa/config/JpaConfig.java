@@ -57,7 +57,7 @@ public class JpaConfig {
             metadata.addAnnotatedClass(javaType);
         }
         generateUpdate(metadata);
-        generateCreateAndDrop(metadata);
+        generateCreate(metadata);
 
 
         //注册对象转换器
@@ -66,17 +66,17 @@ public class JpaConfig {
 
     }
 
-    private void generateUpdate(MetadataSources metadata) {
+    private void generateCreate(MetadataSources metadata) {
         MetadataImplementor metadataImplementor = (MetadataImplementor) metadata.getMetadataBuilder().build();
         SchemaExport schemaExport = new SchemaExport();
         String outputFile = "create.sql";
         truncFile(outputFile);
         schemaExport.setOutputFile(outputFile);
         schemaExport.setDelimiter(";");
-        schemaExport.execute(EnumSet.of(TargetType.SCRIPT), SchemaExport.Action.BOTH, metadataImplementor);
+        schemaExport.execute(EnumSet.of(TargetType.SCRIPT), SchemaExport.Action.CREATE, metadataImplementor);
     }
 
-    private void generateCreateAndDrop(MetadataSources metadata) {
+    private void generateUpdate(MetadataSources metadata) {
         MetadataImplementor metadataImplementor = (MetadataImplementor) metadata.getMetadataBuilder().build();
         SchemaUpdate schemaExport=new SchemaUpdate();
         String outputFile = "update.sql";

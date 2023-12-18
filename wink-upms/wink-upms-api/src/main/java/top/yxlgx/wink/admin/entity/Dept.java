@@ -89,7 +89,8 @@ public class Dept extends BaseEntity implements Serializable {
     @ManyToMany(cascade= CascadeType.DETACH,fetch = FetchType.EAGER)
     @JoinTable(name = "sys_roles_depts",
             joinColumns = {@JoinColumn(name = "dept_id",referencedColumnName = "dept_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
+            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")}
+    )
     private Set<Role> roles;
 
     @Override

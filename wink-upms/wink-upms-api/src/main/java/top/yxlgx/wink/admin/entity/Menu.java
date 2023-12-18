@@ -1,6 +1,5 @@
 package top.yxlgx.wink.admin.entity;
 
-import com.alibaba.fastjson2.annotation.JSONField;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Getter;
