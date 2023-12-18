@@ -80,6 +80,7 @@ public class Role extends BaseEntity implements Serializable {
     @Comment("是否删除")
     private Integer deleted=0;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
@@ -89,10 +90,8 @@ public class Role extends BaseEntity implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "menu_id",referencedColumnName = "menu_id")})
     private Set<Menu> menus;
 
-    @ManyToMany(cascade= CascadeType.DETACH,fetch = FetchType.EAGER)
-    @JoinTable(name = "sys_roles_depts",
-            joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")},
-            inverseJoinColumns = {@JoinColumn(name = "dept_id",referencedColumnName = "dept_id")})
+    @JsonIgnore
+    @ManyToMany(cascade= CascadeType.DETACH,mappedBy = "roles")
     private Set<Dept> depts;
 
     @Override

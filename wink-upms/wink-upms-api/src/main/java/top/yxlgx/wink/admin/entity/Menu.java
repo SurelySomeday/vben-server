@@ -151,6 +151,7 @@ public class Menu extends BaseEntity implements Serializable {
     /**
      * 拥有菜单的角色
      */
+    @JsonIgnore
     @ManyToMany(cascade= CascadeType.DETACH,mappedBy = "menus")
     private Set<Role> roles;
 

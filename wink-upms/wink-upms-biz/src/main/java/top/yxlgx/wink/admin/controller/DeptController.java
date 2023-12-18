@@ -12,6 +12,7 @@ import top.yxlgx.wink.admin.entity.Dept;
 import top.yxlgx.wink.admin.entity.base.BaseEntity;
 import top.yxlgx.wink.admin.query.DeptQueryDTO;
 import top.yxlgx.wink.admin.repository.DeptRepository;
+import top.yxlgx.wink.admin.service.DeptService;
 import top.yxlgx.wink.common.jpa.util.QueryHelp;
 import top.yxlgx.wink.core.util.Result;
 
@@ -28,7 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DeptController {
 
-    private final DeptRepository deptRepository;
+    private final DeptService deptService;
 
     /**
      * 部门查询
@@ -38,11 +39,7 @@ public class DeptController {
      */
     @GetMapping
     public Result<Page<Dept>> list(Pageable pageable, DeptQueryDTO deptQueryDTO){
-        Page<Dept> menuPage = deptRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
-            Predicate predicate = QueryHelp.getPredicate(root, deptQueryDTO, criteriaQuery,criteriaBuilder);
-            return criteriaQuery.where(predicate).getRestriction();
-        }, pageable);
-        return Result.success(menuPage);
+        return Result.success(deptService.findAll(deptQueryDTO,pageable));
     }
 
     /**
@@ -54,7 +51,7 @@ public class DeptController {
     public Result<Void> save(@RequestBody @Validated({BaseEntity.Create.class}) DeptDTO deptDTO){
         Dept dept=new Dept();
         BeanUtils.copyProperties(deptDTO, dept);
-        deptRepository.save(dept);
+        deptService.save(dept);
         return Result.success();
     }
 
@@ -68,7 +65,7 @@ public class DeptController {
     public Result<Void> update(@RequestBody @Validated({BaseEntity.Update.class}) DeptDTO deptDTO){
         Dept dept=new Dept();
         BeanUtils.copyProperties(deptDTO, dept);
-        deptRepository.save(dept);
+        deptService.save(dept);
         return Result.success();
     }
 
@@ -79,7 +76,7 @@ public class DeptController {
      */
     @DeleteMapping
     public Result<Void> delete(List<Long> ids){
-        deptRepository.deleteAllById(ids);
+        deptService.deleteAllById(ids);
         return Result.success();
     }
 

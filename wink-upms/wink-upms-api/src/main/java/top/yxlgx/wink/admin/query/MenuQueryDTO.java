@@ -3,6 +3,7 @@ package top.yxlgx.wink.admin.query;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import top.yxlgx.wink.common.jpa.annotation.Query;
+import top.yxlgx.wink.common.jpa.dto.BaseQuery;
 
 /**
  * @author yanxin
@@ -10,7 +11,7 @@ import top.yxlgx.wink.common.jpa.annotation.Query;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class MenuQueryDTO extends BaseQuery{
+public class MenuQueryDTO extends BaseQuery {
     @Query
     Long menuId;
 

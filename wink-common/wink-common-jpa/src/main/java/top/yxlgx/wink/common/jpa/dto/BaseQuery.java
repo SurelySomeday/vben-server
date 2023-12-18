@@ -1,4 +1,4 @@
-package top.yxlgx.wink.admin.query;
+package top.yxlgx.wink.common.jpa.dto;
 
 /**
  * @author yanxin

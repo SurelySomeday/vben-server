@@ -1,11 +1,11 @@
-package top.yxlgx.wink.admin.service;
+package top.yxlgx.wink.common.jpa.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.Nullable;
-import top.yxlgx.wink.admin.query.BaseQuery;
+import top.yxlgx.wink.common.jpa.dto.BaseQuery;
 
 import java.util.List;
 import java.util.Optional;

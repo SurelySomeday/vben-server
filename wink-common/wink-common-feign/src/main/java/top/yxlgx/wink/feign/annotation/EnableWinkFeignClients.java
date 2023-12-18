@@ -49,7 +49,7 @@ public @interface EnableWinkFeignClients {
 	 * @return the array of 'basePackages'.
 	 */
 	@AliasFor(annotation = EnableFeignClients.class, attribute = "basePackages")
-	String[] basePackages() default { "top.yxlgx.wink" };
+	String[] basePackages() default { "top.yxlgx.wink.*.feign" };
 
 
 }

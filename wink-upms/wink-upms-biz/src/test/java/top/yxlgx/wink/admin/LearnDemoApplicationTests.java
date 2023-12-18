@@ -1,5 +1,7 @@
 package top.yxlgx.wink.admin;
 
+import com.alibaba.fastjson2.JSON;
+import com.cosium.spring.data.jpa.entity.graph.repository.support.EntityGraphJpaRepositoryFactoryBean;
 import com.querydsl.core.types.Expression;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.annotation.Resource;
@@ -7,16 +9,21 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.hibernate.query.sql.internal.NativeQueryImpl;
+import org.hibernate.transform.Transformers;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.Transactional;
 import top.yxlgx.wink.admin.entity.*;
 import top.yxlgx.wink.admin.repository.RoleRepository;
 import top.yxlgx.wink.admin.repository.UserRepository;
 import top.yxlgx.wink.admin.service.MenuService;
 import top.yxlgx.wink.admin.vo.MenuVO;
+import top.yxlgx.wink.admin.vo.UserVO;
 import top.yxlgx.wink.common.jpa.orm.JpaResultTransformer;
 
 import java.lang.reflect.Modifier;
@@ -25,6 +32,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @SpringBootTest
+@EnableJpaRepositories(repositoryFactoryBeanClass = EntityGraphJpaRepositoryFactoryBean.class)
 class LearnDemoApplicationTests {
 
     @Resource
@@ -67,7 +75,13 @@ class LearnDemoApplicationTests {
                                 .limit(1)
                 ))*/
                 .fetch();
-        System.out.println(fetch);
+        //System.out.println(fetch);
+        JPAQuery<?> query2 = new JPAQuery<Void>(entityManager);
+        QUser qUser=QUser.user;
+        List<?> fetch2 = query2
+                .from(qUser)
+                .fetch();
+        System.out.println(fetch2);
 
     }
 
@@ -108,16 +122,25 @@ class LearnDemoApplicationTests {
 
     @SuppressWarnings("unchecked")
     @Test
+
     void contextLoads() {
-        Optional<Role> roleOptional = roleRepository.findById(1L);
+        Session session = entityManager.unwrap(Session.class);
+        SessionFactory sessionFactory = entityManager.getEntityManagerFactory().unwrap(SessionFactory.class);
+        List<Object> list =session.createNativeQuery(
+                "SELECT {pr.*}, {pt.*} " +
+                "FROM sys_user pr, sys_dept pt " +
+                "WHERE pr.dept_id = pt.dept_id", Object.class)
+                .addEntity("pr", User.class)
+                .addEntity("pt", Dept.class)
+                .list();
+        System.out.println(JSON.toJSON(list));
+
+        List<UserVO> userVOS = userRepository.findUsersByDept_DeptId(1L);
+        System.out.println(JSON.toJSON(userVOS));
+
     }
 
 
-
-    public static void main(String[] args) {
-
-
-    }
 
 
 }

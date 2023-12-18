@@ -3,6 +3,7 @@ package top.yxlgx.wink.admin.query;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import top.yxlgx.wink.common.jpa.annotation.Query;
+import top.yxlgx.wink.common.jpa.dto.BaseQuery;
 
 import java.util.List;
 

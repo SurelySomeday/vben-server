@@ -1,5 +1,6 @@
 package top.yxlgx.wink.common.jpa.orm.convert;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.convert.TypeDescriptor;
@@ -9,12 +10,14 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @author yanxin
+ * @Description: spring转换器，用于JPA查询结果转实体对象，只适用于Repository中@Query(value = "",nativeQuery = true)
+ */
 public class JpaStandardConverter implements ConditionalGenericConverter {
 
 
@@ -66,7 +69,7 @@ public class JpaStandardConverter implements ConditionalGenericConverter {
             }
             try {
                 String key = targetPd.getName();
-                String toUnderlineCaseKey = StrUtil.toCamelCase(key,'_');
+                String toUnderlineCaseKey = StrUtil.toUnderlineCase(key);
                 Object value = null;
                 //驼峰转下划线
                 if(map.containsKey(toUnderlineCaseKey)){
@@ -81,29 +84,7 @@ public class JpaStandardConverter implements ConditionalGenericConverter {
                 }
                 Parameter[] parameters = writeMethod.getParameters();
                 Class<?> type = parameters[0].getType();
-                //常见类型处理
-                if (type == String.class) {
-                    writeMethod.invoke(target, value.toString());
-                } else if (type == Integer.class) {
-                    writeMethod.invoke(target, Integer.parseInt(value.toString()));
-                } else if (type== Long.class) {
-                    writeMethod.invoke(target, Long.parseLong(value.toString()));
-                } else if (type == Double.class) {
-                    writeMethod.invoke(target, Double.parseDouble(value.toString()));
-                } else if (type == Float.class) {
-                    writeMethod.invoke(target, Float.parseFloat(value.toString()));
-                } else {
-                    if (type == Date.class) {
-                        if (value instanceof Timestamp) {
-                            long time = ((Timestamp) value).getTime();
-                            writeMethod.invoke(target, new Date(time));
-                        }else{
-                            long time = ((Timestamp) value).getTime();
-                            writeMethod.invoke(target, new Date(time));
-                        }
-                    }
-
-                }
+                BeanUtil.setFieldValue(target, key, value);
             } catch (Exception ex) {
                 //throw new FatalBeanException("Could not copy properties from source to target", ex);
                 ex.printStackTrace();

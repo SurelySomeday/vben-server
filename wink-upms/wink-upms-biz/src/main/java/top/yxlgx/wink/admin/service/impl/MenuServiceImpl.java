@@ -3,7 +3,7 @@ package top.yxlgx.wink.admin.service.impl;
 import org.springframework.stereotype.Service;
 import top.yxlgx.wink.admin.entity.Menu;
 import top.yxlgx.wink.admin.repository.MenuRepository;
-import top.yxlgx.wink.admin.service.BaseServiceImpl;
+import top.yxlgx.wink.common.jpa.service.BaseServiceImpl;
 import top.yxlgx.wink.admin.service.MenuService;
 
 /**
