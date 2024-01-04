@@ -13,5 +13,4 @@ import top.yxlgx.wink.admin.service.MenuService;
 @Service
 public class MenuServiceImpl extends BaseServiceImpl<MenuRepository, Menu, Long> implements MenuService {
 
-
 }

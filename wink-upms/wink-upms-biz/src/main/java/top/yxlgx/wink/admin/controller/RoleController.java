@@ -12,6 +12,7 @@ import top.yxlgx.wink.admin.entity.Role;
 import top.yxlgx.wink.admin.entity.base.BaseEntity;
 import top.yxlgx.wink.admin.query.RoleQueryDTO;
 import top.yxlgx.wink.admin.repository.RoleRepository;
+import top.yxlgx.wink.admin.service.RoleService;
 import top.yxlgx.wink.common.jpa.util.QueryHelp;
 import top.yxlgx.wink.core.util.Result;
 
@@ -28,7 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RoleController {
 
-    private final RoleRepository roleRepository;
+    private final RoleService roleService;
 
     /**
      * 角色查询
@@ -38,11 +39,7 @@ public class RoleController {
      */
     @GetMapping
     public Result<Page<Role>> list(Pageable pageable, RoleQueryDTO roleQueryDTO){
-        Page<Role>  rolePage = roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
-            Predicate predicate = QueryHelp.getPredicate(root, roleQueryDTO, criteriaQuery,criteriaBuilder);
-            return criteriaQuery.where(predicate).getRestriction();
-        }, pageable);
-        return Result.success(rolePage);
+        return Result.success(roleService.findAll(roleQueryDTO,pageable));
     }
 
     /**
@@ -54,7 +51,7 @@ public class RoleController {
     public Result<Void> save(@RequestBody @Validated({BaseEntity.Create.class}) RoleDTO roleDTO){
         Role role=new Role();
         BeanUtils.copyProperties(roleDTO,role);
-        roleRepository.save(role);
+        roleService.save(role);
         return Result.success();
     }
 
@@ -67,7 +64,7 @@ public class RoleController {
     public Result<Void> update(@RequestBody @Validated({BaseEntity.Update.class}) RoleDTO roleDTO){
         Role role=new Role();
         BeanUtils.copyProperties(roleDTO,role);
-        roleRepository.save(role);
+        roleService.save(role);
         return Result.success();
     }
 
@@ -78,7 +75,7 @@ public class RoleController {
      */
     @DeleteMapping
     public Result<Void> delete(List<Long> ids){
-        roleRepository.deleteAllById(ids);
+        roleService.deleteAllById(ids);
         return Result.success();
     }
 }

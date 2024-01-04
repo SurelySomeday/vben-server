@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import top.yxlgx.wink.admin.dto.MenuDTO;
 import top.yxlgx.wink.admin.entity.Menu;
 import top.yxlgx.wink.admin.entity.base.BaseEntity;
+import top.yxlgx.wink.admin.facade.UserBehaviorFacade;
 import top.yxlgx.wink.admin.query.MenuQueryDTO;
 import top.yxlgx.wink.admin.service.MenuService;
+import top.yxlgx.wink.admin.vo.MenuVO;
 import top.yxlgx.wink.core.util.Result;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 菜单管理
@@ -27,6 +30,15 @@ public class MenuController {
 
     @Resource
     MenuService menuService;
+
+    @Resource
+    UserBehaviorFacade userBehaviorFacade;
+
+    @GetMapping("getMenuByUserId")
+    public Result<Set<MenuVO>> getMenuByUserId(Long userId){
+        return Result.success(userBehaviorFacade.generateMenuByUserId(userId));
+    }
+
 
     /**
      * 菜单查询

@@ -17,6 +17,9 @@ public class UserQueryDTO extends BaseQuery {
     @Query
     Long userId;
 
+    @Query(type = Query.Type.EQUAL)
+    String username;
+
     @Query(type = Query.Type.INNER_LIKE)
     String name;
 

@@ -27,6 +27,11 @@ public class BaseServiceImpl<R extends EntityGraphCrudRepository<T, ID> & JpaSpe
 
 
     @Override
+    public Optional<T> findById(ID id) {
+        return repository.findById(id);
+    }
+
+    @Override
     public List<T> findAll(BaseQuery baseQuery) {
         return repository.findAll((root, criteriaQuery, criteriaBuilder) -> {
             Predicate predicate = QueryHelp.getPredicate(root, baseQuery, criteriaQuery,criteriaBuilder);

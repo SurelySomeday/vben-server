@@ -16,6 +16,7 @@ import java.util.Optional;
  */
 public interface BaseService<T, ID> {
 
+    Optional<T> findById(ID id);
     List<T> findAll(@Nullable BaseQuery baseQuery);
 
     Page<T> findAll(@Nullable BaseQuery baseQuery, Pageable pageable);

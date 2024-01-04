@@ -1,0 +1,34 @@
+version: '3'
+services:
+  wink-mysql:
+    build:
+      context: ./db
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: 123456
+    restart: always
+    container_name: learner-mysql
+    image: mysql:5.7.4
+
+  wink-redis:
+    image: redis:7.0.0
+    restart: always
+    container_name: learner-redis
+    hostname: learner-redis
+
+  wink-auth:
+    build:
+      context: ./wink-auth
+    restart: always
+    container_name: learner-auth
+    hostname: wink-auth
+    image: wink-auth
+
+  wink-upms:
+    build:
+      context: ./wink-upms/wink-upms-biz
+    restart: always
+    container_name: wink-upms
+    hostname: wink-upms
+    image: wink-upms
+

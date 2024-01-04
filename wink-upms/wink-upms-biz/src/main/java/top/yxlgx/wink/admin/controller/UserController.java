@@ -1,6 +1,7 @@
 package top.yxlgx.wink.admin.controller;
 
 import cn.dev33.satoken.annotation.SaIgnore;
+import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import top.yxlgx.wink.admin.entity.User;
 import top.yxlgx.wink.admin.entity.base.BaseEntity;
 import top.yxlgx.wink.admin.query.UserQueryDTO;
 import top.yxlgx.wink.admin.repository.UserRepository;
+import top.yxlgx.wink.admin.service.UserService;
 import top.yxlgx.wink.admin.vo.UserLoginResult;
 import top.yxlgx.wink.admin.vo.UserVO;
 import top.yxlgx.wink.common.jpa.util.QueryHelp;
@@ -33,7 +35,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     /**
      * 获取用户信息
@@ -41,12 +43,15 @@ public class UserController {
      */
     @GetMapping("/getUserInfo")
     public Result<UserLoginResult> getUserInfo(){
-        String currentUsername = "";
-        Optional<User> optionalUser = userRepository.findByUsername(currentUsername);
-        User user = optionalUser.get();
-        UserLoginResult userLoginResult=new UserLoginResult();
-        BeanUtils.copyProperties(user,userLoginResult);
-        return Result.success(userLoginResult);
+        long loginId = StpUtil.getLoginIdAsLong();
+        Optional<User> optionalUser = userService.findById(loginId);
+        if(optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            UserLoginResult userLoginResult = new UserLoginResult();
+            BeanUtils.copyProperties(user, userLoginResult);
+            return Result.success(userLoginResult);
+        }
+        return Result.failed();
     }
 
     /**
@@ -56,7 +61,7 @@ public class UserController {
     @SaIgnore
     @GetMapping("/getUserByName")
     public Result<UserVO> getUserInfo(@RequestParam("username") String username){
-        Optional<User> optionalUser = userRepository.findByUsername(username);
+        Optional<User> optionalUser = userService.findByUsername(username);
         return optionalUser.map(user -> Result.success(BeanUtil.copyProperties(user, UserVO.class))).orElseGet(() -> Result.success(null));
     }
 
@@ -69,11 +74,7 @@ public class UserController {
     @SaIgnore
     @GetMapping
     public Result<Page<User>> list(Pageable pageable, UserQueryDTO userQueryDTO){
-        Page<User>  userPage = userRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
-            Predicate predicate = QueryHelp.getPredicate(root, userQueryDTO,criteriaQuery, criteriaBuilder);
-            return criteriaQuery.where(predicate).getRestriction();
-        }, pageable);
-        return Result.success(userPage);
+        return Result.success(userService.findAll(userQueryDTO,pageable));
     }
 
     /**
@@ -85,7 +86,7 @@ public class UserController {
     public Result<Void> save(@RequestBody @Validated({BaseEntity.Create.class}) UserDTO userDTO){
         User user=new User();
         BeanUtils.copyProperties(userDTO,user);
-        userRepository.save(user);
+        userService.save(user);
         return Result.success();
     }
 
@@ -98,7 +99,7 @@ public class UserController {
     public Result<Void> update(@RequestBody @Validated({BaseEntity.Update.class}) UserDTO userDTO){
         User user=new User();
         BeanUtils.copyProperties(userDTO,user);
-        userRepository.save(user);
+        userService.save(user);
         return Result.success();
     }
 
@@ -109,7 +110,7 @@ public class UserController {
      */
     @DeleteMapping
     public Result<Void> delete(List<Long> ids){
-        userRepository.deleteAllById(ids);
+        userService.deleteAllById(ids);
         return Result.success();
     }
 }

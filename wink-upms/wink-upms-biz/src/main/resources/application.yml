@@ -34,13 +34,15 @@ spring:
         default_batch_fetch_size: 500
         hbm2ddl:
           default_constraint_mode: NO_CONSTRAINT
-        dialect_resolvers: top.yxlgx.wink.common.jpa.handler.MyStandardDialectResolver
+        dialect_resolvers: top.yxlgx.wink.common.jpa.handler.EnhanceDialectResolver
   data:
     web:
       pageable:
         one-indexed-parameters: true
     redis:
       host: 127.0.0.1
+      port: 6379
+      database: 1
 #  h2:
 #    console:
 #      enabled: true
@@ -52,24 +54,21 @@ logging:
     org.hibernate.tool: debug
 
 sa-token:
+  # SSO-相关配置
   sso:
-    # 打开模式三（使用Http请求校验ticket）
-    is-http: true
-    # SSO-Server端 统一认证地址 
+    # SSO-Server端 统一认证地址
     auth-url: http://127.0.0.1:9000/sso/auth
-    # SSO-Server端 ticket校验地址 
-    check-ticket-url: http://127.0.0.1:9000/sso/checkTicket
-    # 单点注销地址 
-    slo-url: http://127.0.0.1:9000/sso/signout
-    # SSO-Server端 查询数据地址 
-    get-data-url: http://127.0.0.1:9000/sso/getData
-    is-slo: true
-  sign:
-    # API 接口调用秘钥
-    secret-key: kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
-    # ---- 除了以上配置项，你还需要为 Sa-Token 配置http请求处理器（文档有步骤说明）
 
-forest:
-  # 关闭 forest 请求日志打印
-  log-enabled: false
+  # 配置Sa-Token单独使用的Redis连接 （此处需要和SSO-Server端连接同一个Redis）
+  alone-redis:
+    # Redis数据库索引 (默认为0)
+    database: 1
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    # 连接超时时间
+    timeout: 10s
 

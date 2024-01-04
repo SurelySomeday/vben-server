@@ -1,12 +1,7 @@
 package top.yxlgx.wink.common.security.client.endpoint;
 
-import cn.dev33.satoken.config.SaSsoConfig;
 import cn.dev33.satoken.sso.SaSsoProcessor;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
-import com.dtflys.forest.Forest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class SsoClientController {
-
 
     // 首页
     @RequestMapping("/")

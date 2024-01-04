@@ -32,17 +32,16 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
-
         <!-- Sa-Token插件：权限缓存与业务缓存分离 -->
-<!--        <dependency>
+        <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-alone-redis</artifactId>
-        </dependency>-->
-        <!-- Http请求工具 -->
-        <dependency>
+        </dependency>
+        <!-- Http请求工具 模式三 -->
+<!--        <dependency>
             <groupId>com.dtflys.forest</groupId>
             <artifactId>forest-spring-boot3-starter</artifactId>
-        </dependency>
+        </dependency>-->
 
 
     </dependencies>
