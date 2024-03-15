@@ -6,11 +6,12 @@
     <parent>
         <groupId>top.yxlgx</groupId>
         <artifactId>wink</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>wink-common</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>wink-common-bom</module>
         <module>wink-common-core</module>
@@ -18,6 +19,7 @@
         <module>wink-common-security-server</module>
         <module>wink-common-jpa</module>
         <module>wink-common-feign</module>
+        <module>wink-common-doc</module>
     </modules>
 
 

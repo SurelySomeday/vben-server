@@ -5,12 +5,14 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import top.yxlgx.wink.admin.dto.UserDTO;
+import top.yxlgx.wink.admin.entity.Role;
 import top.yxlgx.wink.admin.entity.User;
 import top.yxlgx.wink.admin.entity.base.BaseEntity;
 import top.yxlgx.wink.admin.query.UserQueryDTO;
@@ -73,7 +75,7 @@ public class UserController {
      */
     @SaIgnore
     @GetMapping
-    public Result<Page<User>> list(Pageable pageable, UserQueryDTO userQueryDTO){
+    public Result<Page<User>> list(@ParameterObject Pageable pageable, @ParameterObject UserQueryDTO userQueryDTO){
         return Result.success(userService.findAll(userQueryDTO,pageable));
     }
 
@@ -84,8 +86,7 @@ public class UserController {
      */
     @PutMapping
     public Result<Void> save(@RequestBody @Validated({BaseEntity.Create.class}) UserDTO userDTO){
-        User user=new User();
-        BeanUtils.copyProperties(userDTO,user);
+        User user = BeanUtil.copyProperties(userDTO, User.class);
         userService.save(user);
         return Result.success();
     }
@@ -97,8 +98,7 @@ public class UserController {
      */
     @PostMapping
     public Result<Void> update(@RequestBody @Validated({BaseEntity.Update.class}) UserDTO userDTO){
-        User user=new User();
-        BeanUtils.copyProperties(userDTO,user);
+        User user = BeanUtil.copyProperties(userDTO, User.class);
         userService.save(user);
         return Result.success();
     }

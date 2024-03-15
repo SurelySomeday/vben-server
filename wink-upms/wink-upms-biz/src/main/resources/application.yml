@@ -1,6 +1,8 @@
 server:
   port: 7019
 spring:
+  application:
+    name: wink
   main:
     allow-circular-references: true
     allowBeanDefinitionOverriding: true
@@ -21,7 +23,7 @@ spring:
   jpa:
     #show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
@@ -72,3 +74,32 @@ sa-token:
     # 连接超时时间
     timeout: 10s
 
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: top.yxlgx.wink.admin
+  enable-javadoc: true
+  enable-native-support: true
+  model-converters:
+    pageable-converter:
+      enabled: true
+  components:
+    # 鉴权方式配置
+    security-schemes:
+      apiKey:
+        type: APIKEY
+        in: HEADER
+        name: ${sa-token.token-name}
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn

@@ -2,7 +2,9 @@ package top.yxlgx.wink.admin;
 
 import com.alibaba.fastjson2.JSON;
 import com.cosium.spring.data.jpa.entity.graph.repository.support.EntityGraphJpaRepositoryFactoryBean;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
@@ -79,10 +81,14 @@ class LearnDemoApplicationTests {
         //System.out.println(fetch);
         JPAQuery<?> query2 = new JPAQuery<Void>(entityManager);
         QUser qUser=QUser.user;
-        List<?> fetch2 = query2
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(qUser.userId.eq(1L));
+        List<UserVO> fetch2 = query2
+                .select(Projections.bean(UserVO.class, qUser.userId))
                 .from(qUser)
+                .where(builder)
                 .fetch();
-        System.out.println(fetch2);
+        System.out.println(JSON.toJSON(fetch2));
 
     }
 
@@ -125,19 +131,18 @@ class LearnDemoApplicationTests {
     @Test
 
     void contextLoads() {
-        Session session = entityManager.unwrap(Session.class);
-        SessionFactory sessionFactory = entityManager.getEntityManagerFactory().unwrap(SessionFactory.class);
-        List<Object> list =session.createNativeQuery(
-                "SELECT {pr.*}, {pt.*} " +
-                "FROM sys_user pr, sys_dept pt " +
-                "WHERE pr.dept_id = pt.dept_id", Object.class)
-                .addEntity("pr", User.class)
-                .addEntity("pt", Dept.class)
-                .list();
-        System.out.println(JSON.toJSON(list));
-
-        List<UserVO> userVOS = userRepository.findUsersByDept_DeptId(1L);
-        System.out.println(JSON.toJSON(userVOS));
+//        Session session = entityManager.unwrap(Session.class);
+//        SessionFactory sessionFactory = entityManager.getEntityManagerFactory().unwrap(SessionFactory.class);
+//        List<UserVO> list =session.createNativeQuery(
+//                "SELECT {pr.*}, {pt.*} " +
+//                "FROM sys_user pr LEFT JOIN sys_dept pt ON pr.dept_id = pt.dept_id", UserVO.class)
+//                .addEntity("pr", User.class)
+//                .addEntity("pt", Dept.class)
+//                .list();
+//        System.out.println(JSON.toJSON(list));
+//
+//        List<UserVO> userVOS = userRepository.findUsersByDept_DeptId(1L);
+//        System.out.println(JSON.toJSON(userVOS));
 
     }
 

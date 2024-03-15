@@ -32,6 +32,9 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new SaInterceptor(handle -> StpUtil.checkLogin()))
                 .addPathPatterns("/**")
                 .excludePathPatterns("/")
+                .excludePathPatterns("/doc.html")
+                .excludePathPatterns("/v3/api-docs/**")
+                .excludePathPatterns("/webjars/**")
                 .excludePathPatterns("/sso/**");
     }
 

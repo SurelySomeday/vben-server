@@ -1,0 +1,8 @@
+# 登录
+POST http://localhost:9000/sso/doLogin?name=admin&pwd=admin
+
+>{% client.global.set("auth_token", response.body.json.data); %}
+
+###
+GET http://localhost:7019/menu/getMenuByUserId
+#Authorization: Bearer {{auth_token}}

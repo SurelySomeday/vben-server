@@ -6,16 +6,15 @@
 
     <groupId>yxlgx.top</groupId>
     <artifactId>wink-common-bom</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <name>wink-common-bom</name>
 
     <properties>
-        <wink.common.version>${project.version}</wink.common.version>
+        <revision>1.0-SNAPSHOT</revision>
         <spring-boot.version>3.1.0</spring-boot.version>
         <java.version>17</java.version>
-        <wink.version>1.0-SNAPSHOT</wink.version>
         <spring-data-jpa-entity-graph.version>3.1.0</spring-data-jpa-entity-graph.version>
         <p6spy.version>3.9.1</p6spy.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
@@ -25,11 +24,13 @@
         <jwt.version>0.11.5</jwt.version>
         <spring-security-oauth2-authorization-server.version>1.1.0</spring-security-oauth2-authorization-server.version>
         <querydsl.version>5.0.0</querydsl.version>
-        <hutool.version>5.8.16</hutool.version>
+        <hutool.version>5.8.26</hutool.version>
         <satoken.version>1.37.0</satoken.version>
         <fastjson2.version>2.0.41</fastjson2.version>
         <commons.lang3.version>3.13.0</commons.lang3.version>
         <forest.version>1.5.33</forest.version>
+        <knife4j.version>4.4.0</knife4j.version>
+        <therapi-javadoc.version>0.15.0</therapi-javadoc.version>
     </properties>
 
     <dependencyManagement>
@@ -42,37 +43,42 @@
             <dependency>
                 <groupId>top.yxlgx</groupId>
                 <artifactId>wink-common-core</artifactId>
-                <version>${wink.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>top.yxlgx</groupId>
                 <artifactId>wink-common-security-client</artifactId>
-                <version>${wink.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>top.yxlgx</groupId>
                 <artifactId>wink-common-security-server</artifactId>
-                <version>${wink.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>top.yxlgx</groupId>
                 <artifactId>wink-common-jpa</artifactId>
-                <version>${wink.version}</version>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.yxlgx</groupId>
+                <artifactId>wink-common-doc</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>top.yxlgx</groupId>
                 <artifactId>wink-common-feign</artifactId>
-                <version>${wink.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>top.yxlgx</groupId>
                 <artifactId>wink-umps</artifactId>
-                <version>${wink.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>top.yxlgx</groupId>
                 <artifactId>wink-upms-api</artifactId>
-                <version>${wink.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.cosium.spring.data</groupId>
@@ -166,6 +172,18 @@
                 <artifactId>forest-spring-boot3-starter</artifactId>
                 <version>${forest.version}</version>
             </dependency>
+            <!-- 文档 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.therapi</groupId>
+                <artifactId>therapi-runtime-javadoc</artifactId>
+                <version>${therapi-javadoc.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

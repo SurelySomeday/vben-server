@@ -1,7 +1,8 @@
 package top.yxlgx.wink.admin.controller;
 
-import jakarta.persistence.criteria.Predicate;
+import cn.hutool.core.bean.BeanUtil;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,9 +12,7 @@ import top.yxlgx.wink.admin.dto.DeptDTO;
 import top.yxlgx.wink.admin.entity.Dept;
 import top.yxlgx.wink.admin.entity.base.BaseEntity;
 import top.yxlgx.wink.admin.query.DeptQueryDTO;
-import top.yxlgx.wink.admin.repository.DeptRepository;
 import top.yxlgx.wink.admin.service.DeptService;
-import top.yxlgx.wink.common.jpa.util.QueryHelp;
 import top.yxlgx.wink.core.util.Result;
 
 import java.util.List;
@@ -37,8 +36,9 @@ public class DeptController {
      * @param deptQueryDTO
      * @return
      */
+
     @GetMapping
-    public Result<Page<Dept>> list(Pageable pageable, DeptQueryDTO deptQueryDTO){
+    public Result<Page<Dept>> list(@ParameterObject Pageable pageable,@ParameterObject DeptQueryDTO deptQueryDTO){
         return Result.success(deptService.findAll(deptQueryDTO,pageable));
     }
 
@@ -49,8 +49,7 @@ public class DeptController {
      */
     @PutMapping
     public Result<Void> save(@RequestBody @Validated({BaseEntity.Create.class}) DeptDTO deptDTO){
-        Dept dept=new Dept();
-        BeanUtils.copyProperties(deptDTO, dept);
+        Dept dept = BeanUtil.copyProperties(deptDTO, Dept.class);
         deptService.save(dept);
         return Result.success();
     }
@@ -63,8 +62,7 @@ public class DeptController {
      */
     @PostMapping
     public Result<Void> update(@RequestBody @Validated({BaseEntity.Update.class}) DeptDTO deptDTO){
-        Dept dept=new Dept();
-        BeanUtils.copyProperties(deptDTO, dept);
+        Dept dept = BeanUtil.copyProperties(deptDTO, Dept.class);
         deptService.save(dept);
         return Result.success();
     }

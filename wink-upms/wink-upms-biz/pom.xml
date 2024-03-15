@@ -6,7 +6,7 @@
     <parent>
         <groupId>top.yxlgx</groupId>
         <artifactId>wink-upms</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>wink-upms-biz</artifactId>
@@ -27,6 +27,10 @@
         <dependency>
             <groupId>top.yxlgx</groupId>
             <artifactId>wink-common-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.yxlgx</groupId>
+            <artifactId>wink-common-doc</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -129,18 +133,6 @@
                     <metadataRepository>
                         <enabled>true</enabled>
                     </metadataRepository>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
                 </configuration>
             </plugin>
         </plugins>

@@ -6,7 +6,7 @@
     <parent>
         <groupId>top.yxlgx</groupId>
         <artifactId>wink-common</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>wink-common-security-server</artifactId>

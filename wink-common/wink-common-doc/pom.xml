@@ -5,33 +5,32 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>top.yxlgx</groupId>
-        <artifactId>wink-upms</artifactId>
+        <artifactId>wink-common</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>wink-upms-api</artifactId>
+    <artifactId>wink-common-doc</artifactId>
+
+    <description>
+        wink-common-doc 文档模块
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>top.yxlgx</groupId>
             <artifactId>wink-common-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>top.yxlgx</groupId>
-            <artifactId>wink-common-feign</artifactId>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>top.yxlgx</groupId>
-            <artifactId>wink-common-jpa</artifactId>
-            <scope>provided</scope>
+            <groupId>com.github.therapi</groupId>
+            <artifactId>therapi-runtime-javadoc</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.fastjson2</groupId>
-            <artifactId>fastjson2</artifactId>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
     </dependencies>
-
 </project>

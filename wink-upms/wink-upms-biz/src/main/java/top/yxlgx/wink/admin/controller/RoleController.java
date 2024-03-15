@@ -1,13 +1,16 @@
 package top.yxlgx.wink.admin.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import top.yxlgx.wink.admin.dto.RoleDTO;
+import top.yxlgx.wink.admin.entity.Dept;
 import top.yxlgx.wink.admin.entity.Role;
 import top.yxlgx.wink.admin.entity.base.BaseEntity;
 import top.yxlgx.wink.admin.query.RoleQueryDTO;
@@ -38,7 +41,7 @@ public class RoleController {
      * @return
      */
     @GetMapping
-    public Result<Page<Role>> list(Pageable pageable, RoleQueryDTO roleQueryDTO){
+    public Result<Page<Role>> list(@ParameterObject Pageable pageable, @ParameterObject RoleQueryDTO roleQueryDTO){
         return Result.success(roleService.findAll(roleQueryDTO,pageable));
     }
 
@@ -49,8 +52,7 @@ public class RoleController {
      */
     @PutMapping
     public Result<Void> save(@RequestBody @Validated({BaseEntity.Create.class}) RoleDTO roleDTO){
-        Role role=new Role();
-        BeanUtils.copyProperties(roleDTO,role);
+        Role role = BeanUtil.copyProperties(roleDTO, Role.class);
         roleService.save(role);
         return Result.success();
     }
@@ -62,8 +64,7 @@ public class RoleController {
      */
     @PostMapping
     public Result<Void> update(@RequestBody @Validated({BaseEntity.Update.class}) RoleDTO roleDTO){
-        Role role=new Role();
-        BeanUtils.copyProperties(roleDTO,role);
+        Role role = BeanUtil.copyProperties(roleDTO, Role.class);
         roleService.save(role);
         return Result.success();
     }

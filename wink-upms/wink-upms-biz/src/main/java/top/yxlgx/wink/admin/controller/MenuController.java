@@ -2,6 +2,7 @@ package top.yxlgx.wink.admin.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import jakarta.annotation.Resource;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
@@ -47,7 +48,7 @@ public class MenuController {
      * @return
      */
     @GetMapping
-    public Result<Page<Menu>> list(Pageable pageable, MenuQueryDTO menuQueryDTO){
+    public Result<Page<Menu>> list(@ParameterObject Pageable pageable, @ParameterObject MenuQueryDTO menuQueryDTO){
         return Result.success(menuService.findAll(menuQueryDTO,pageable));
     }
 
